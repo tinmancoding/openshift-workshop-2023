@@ -1,0 +1,17 @@
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: lazy-docker
+spec:
+  source:
+    type: Dockerfile
+    dockerfile: |
+      FROM centos
+      CMD echo 'Hello lazy World! - v1.0' && exec sleep infinity
+  strategy:
+    type: Docker
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'lazy-docker:latest'
